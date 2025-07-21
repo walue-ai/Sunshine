@@ -28,14 +28,8 @@ if(SUNSHINE_ENABLE_CAPNREACTIVE)
 
         add_dependencies(capnreactive capnreactive_build)
 
-        # cmake-lint: disable=C0301
-        target_include_directories(sunshine PRIVATE
-            ${CAPNREACTIVE_ROOT}/sunshine-integration/include
-        )
-
-        target_compile_definitions(sunshine PRIVATE
-            SUNSHINE_CAPNREACTIVE_ENABLED)
-        target_link_libraries(sunshine PRIVATE capnreactive)
+        # Target configuration will be done after sunshine target is created
+        set(CAPNREACTIVE_CONFIGURED TRUE CACHE INTERNAL "CapnReactive is configured")
 
         message(STATUS
             "CapnReactive integration enabled")

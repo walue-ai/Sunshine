@@ -9,6 +9,9 @@ endforeach()
 # Add CapnReactive as a dependency
 add_dependencies(sunshine capnreactive)
 
+# CapnReactive target configuration (after sunshine target is created)
+include(${CMAKE_MODULE_PATH}/targets/capnreactive_target_config.cmake)
+
 # platform specific target definitions
 if(WIN32)
     include(${CMAKE_MODULE_PATH}/targets/windows.cmake)
