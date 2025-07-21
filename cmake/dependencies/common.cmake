@@ -71,6 +71,9 @@ endif()
 set(FFMPEG_INCLUDE_DIRS
         "${FFMPEG_PREPARED_BINARIES}/include")
 
+# CapnReactive integration
+include("${CMAKE_MODULE_PATH}/dependencies/capnreactive.cmake")
+
 # platform specific dependencies
 if(WIN32)
     include("${CMAKE_MODULE_PATH}/dependencies/windows.cmake")
