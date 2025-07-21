@@ -145,10 +145,14 @@ list(APPEND SUNSHINE_EXTERNAL_LIBRARIES
         ${MINIUPNP_LIBRARIES}
         ${CMAKE_THREAD_LIBS_INIT}
         enet
-        libdisplaydevice::display_device
         nlohmann_json::nlohmann_json
         opus
         ${FFMPEG_LIBRARIES}
+
+# Conditionally add libdisplaydevice only if not disabled by CapnReactive
+if(NOT SUNSHINE_ENABLE_CAPNREACTIVE OR SUNSHINE_ENABLE_LIBDISPLAYDEVICE)
+    list(APPEND SUNSHINE_EXTERNAL_LIBRARIES libdisplaydevice::display_device)
+endif()
         ${Boost_LIBRARIES}
         ${OPENSSL_LIBRARIES}
         ${PLATFORM_LIBRARIES})
