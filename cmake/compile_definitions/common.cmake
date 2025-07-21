@@ -148,11 +148,11 @@ list(APPEND SUNSHINE_EXTERNAL_LIBRARIES
         nlohmann_json::nlohmann_json
         opus
         ${FFMPEG_LIBRARIES}
+        ${Boost_LIBRARIES}
+        ${OPENSSL_LIBRARIES}
+        ${PLATFORM_LIBRARIES})
 
 # Conditionally add libdisplaydevice only if not disabled by CapnReactive
 if(NOT SUNSHINE_ENABLE_CAPNREACTIVE OR SUNSHINE_ENABLE_LIBDISPLAYDEVICE)
     list(APPEND SUNSHINE_EXTERNAL_LIBRARIES libdisplaydevice::display_device)
 endif()
-        ${Boost_LIBRARIES}
-        ${OPENSSL_LIBRARIES}
-        ${PLATFORM_LIBRARIES})
