@@ -19,12 +19,8 @@ if(NOT nlohmann_json_FOUND)
 
     fetchcontent_declare(
             json
-            # cmake-lint: disable=C0301
-            URL
-            https://github.com/nlohmann/json/releases/download/v3.11.3/
-            json.tar.xz
+            URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz
             URL_HASH MD5=c23a33f04786d85c29fda8d16b5f0efd
-            DOWNLOAD_EXTRACT_TIMESTAMP
     )
     fetchcontent_makeavailable(json)
 endif()
