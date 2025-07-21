@@ -27,7 +27,6 @@ AlwaysBreakBeforeMultilineStrings: true
 AlwaysBreakTemplateDeclarations: MultiLine
 BinPackArguments: false
 BinPackParameters: false
-BracedInitializerIndentWidth: 2
 BraceWrapping:
   AfterCaseLabel: false
   AfterClass: false
@@ -43,7 +42,6 @@ BraceWrapping:
   IndentBraces: false
   SplitEmptyFunction: false
   SplitEmptyRecord: true
-BreakArrays: true
 BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Attach
 BreakBeforeTernaryOperators: false
@@ -66,10 +64,7 @@ IndentGotoLabels: true
 IndentPPDirectives: BeforeHash
 IndentWidth: 2
 IndentWrappedFunctionNames: true
-InsertBraces: true
-InsertNewlineAtEOF: true
 KeepEmptyLinesAtTheStartOfBlocks: false
-LineEnding: LF
 MaxEmptyLinesToKeep: 1
 NamespaceIndentation: All
 ObjCBinPackProtocolList: Never
@@ -86,10 +81,9 @@ PointerAlignment: Right
 ReferenceAlignment: Pointer
 ReflowComments: true
 RemoveBracesLLVM: false
-RemoveSemicolon: false
 SeparateDefinitionBlocks: Always
 SortIncludes: CaseInsensitive
-SortUsingDeclarations: Lexicographic
+SortUsingDeclarations: true
 SpaceAfterCStyleCast: true
 SpaceAfterLogicalNot: false
 SpaceAfterTemplateKeyword: false
@@ -98,7 +92,6 @@ SpaceBeforeCaseColon: false
 SpaceBeforeCpp11BracedList: true
 SpaceBeforeCtorInitializerColon: false
 SpaceBeforeInheritanceColon: false
-SpaceBeforeJsonColon: false
 SpaceBeforeParens: ControlStatements
 SpaceBeforeRangeBasedForLoopColon: true
 SpaceBeforeSquareBrackets: false
