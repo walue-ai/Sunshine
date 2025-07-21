@@ -1,4 +1,5 @@
 set(CAPNREACTIVE_ROOT "${CMAKE_SOURCE_DIR}/third-party/capnreactive")
+# cmake-lint: disable=C0301
 set(CAPNREACTIVE_LIB_DIR
     "${CAPNREACTIVE_ROOT}/sunshine-integration/target/release")
 
@@ -15,6 +16,7 @@ if(SUNSHINE_ENABLE_CAPNREACTIVE)
 
         add_custom_target(capnreactive_build
             COMMAND cargo build --release
+            # cmake-lint: disable=C0301
             WORKING_DIRECTORY ${CAPNREACTIVE_ROOT}/sunshine-integration
             COMMENT "Building CapnReactive FFI library"
         )

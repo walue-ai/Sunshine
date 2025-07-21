@@ -3,6 +3,7 @@
 
 # CapnReactive integration (conditional) - must be early to set flags
 if(SUNSHINE_ENABLE_CAPNREACTIVE)
+    # cmake-lint: disable=C0301
     # Temporarily disable libdisplaydevice to avoid CMake version conflict
     set(SUNSHINE_ENABLE_LIBDISPLAYDEVICE OFF CACHE BOOL
         "Disable libdisplaydevice for CapnReactive builds" FORCE)
@@ -19,6 +20,7 @@ add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/moonlight-common-c/enet")
 # web server
 add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/Simple-Web-Server")
 
+# cmake-lint: disable=C0301
 # libdisplaydevice (conditional inclusion to avoid CMake version conflicts)
 if(NOT DEFINED SUNSHINE_ENABLE_LIBDISPLAYDEVICE OR
     SUNSHINE_ENABLE_LIBDISPLAYDEVICE)
@@ -43,12 +45,14 @@ if(NOT DEFINED FFMPEG_PREPARED_BINARIES)
     elseif(UNIX AND NOT APPLE)
         set(FFMPEG_PLATFORM_LIBRARIES numa va va-drm va-x11 X11)
     endif()
+    # cmake-lint: disable=C0301
     set(FFMPEG_PREPARED_BINARIES
             "${CMAKE_SOURCE_DIR}/third-party/build-deps/dist/"
             "${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
 
     # check if the directory exists
     if(NOT EXISTS "${FFMPEG_PREPARED_BINARIES}")
+        # cmake-lint: disable=C0301
         message(FATAL_ERROR
                 "FFmpeg pre-compiled binaries not found at "
                 "${FFMPEG_PREPARED_BINARIES}. Please consider contributing to "
