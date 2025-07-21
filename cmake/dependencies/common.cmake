@@ -4,7 +4,7 @@
 # CapnReactive integration (conditional) - must be early to set flags
 if(SUNSHINE_ENABLE_CAPNREACTIVE)
     # Temporarily disable libdisplaydevice to avoid CMake version conflict
-    set(SUNSHINE_ENABLE_LIBDISPLAYDEVICE OFF CACHE BOOL 
+    set(SUNSHINE_ENABLE_LIBDISPLAYDEVICE OFF CACHE BOOL
         "Disable libdisplaydevice for CapnReactive builds" FORCE)
 endif()
 
@@ -20,7 +20,7 @@ add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/moonlight-common-c/enet")
 add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/Simple-Web-Server")
 
 # libdisplaydevice (conditional inclusion to avoid CMake version conflicts)
-if(NOT DEFINED SUNSHINE_ENABLE_LIBDISPLAYDEVICE OR 
+if(NOT DEFINED SUNSHINE_ENABLE_LIBDISPLAYDEVICE OR
    SUNSHINE_ENABLE_LIBDISPLAYDEVICE)
     add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/libdisplaydevice")
 endif()
