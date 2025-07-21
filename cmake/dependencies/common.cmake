@@ -1,6 +1,12 @@
 # load common dependencies
 # this file will also load platform specific dependencies
 
+# CapnReactive integration (conditional) - must be early to set flags
+if(SUNSHINE_ENABLE_CAPNREACTIVE)
+    # Temporarily disable libdisplaydevice to avoid CMake version conflict
+    set(SUNSHINE_ENABLE_LIBDISPLAYDEVICE OFF CACHE BOOL "Disable libdisplaydevice for CapnReactive builds" FORCE)
+endif()
+
 # boost, this should be before Simple-Web-Server as it also depends on boost
 include(dependencies/Boost_Sunshine)
 
@@ -12,8 +18,10 @@ add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/moonlight-common-c/enet")
 # web server
 add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/Simple-Web-Server")
 
-# libdisplaydevice
-add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/libdisplaydevice")
+# libdisplaydevice (conditional inclusion to avoid CMake version conflicts)
+if(NOT DEFINED SUNSHINE_ENABLE_LIBDISPLAYDEVICE OR SUNSHINE_ENABLE_LIBDISPLAYDEVICE)
+    add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/libdisplaydevice")
+endif()
 
 # common dependencies
 include("${CMAKE_MODULE_PATH}/dependencies/nlohmann_json.cmake")
@@ -71,8 +79,10 @@ endif()
 set(FFMPEG_INCLUDE_DIRS
         "${FFMPEG_PREPARED_BINARIES}/include")
 
-# CapnReactive integration
-include("${CMAKE_MODULE_PATH}/dependencies/capnreactive.cmake")
+# CapnReactive integration (include the actual cmake file)
+if(SUNSHINE_ENABLE_CAPNREACTIVE)
+    include("${CMAKE_MODULE_PATH}/dependencies/capnreactive.cmake")
+endif()
 
 # platform specific dependencies
 if(WIN32)

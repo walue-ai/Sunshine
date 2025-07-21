@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef SUNSHINE_CAPNREACTIVE_ENABLED
+
 #include <string>
 #include <cstdint>
 #include <cstddef>
@@ -19,3 +21,5 @@ bool is_capnreactive_initialized();
 void shutdown_capnreactive_transport();
 
 }
+
+#endif // SUNSHINE_CAPNREACTIVE_ENABLED

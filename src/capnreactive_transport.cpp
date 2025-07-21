@@ -1,3 +1,5 @@
+#ifdef SUNSHINE_CAPNREACTIVE_ENABLED
+
 #include "capnreactive_transport.h"
 #include "sunshine_capnreactive.h"
 #include "logging.h"
@@ -158,3 +160,5 @@ void shutdown_capnreactive_transport() {
 }
 
 }
+
+#endif // SUNSHINE_CAPNREACTIVE_ENABLED
