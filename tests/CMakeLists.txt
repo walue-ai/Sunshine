@@ -38,6 +38,11 @@ set(TEST_DEFINITIONS)  # list will be appended as needed
 # this indicates we're building tests in case sunshine needs to adjust some code or add private tests
 list(APPEND TEST_DEFINITIONS SUNSHINE_TESTS)
 
+# Pass CapnReactive flag to tests if enabled
+if(SUNSHINE_ENABLE_CAPNREACTIVE AND CAPNREACTIVE_CONFIGURED)
+    list(APPEND TEST_DEFINITIONS SUNSHINE_CAPNREACTIVE_ENABLED)
+endif()
+
 file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS
         ${CMAKE_SOURCE_DIR}/tests/*.h
         ${CMAKE_SOURCE_DIR}/tests/*.cpp)

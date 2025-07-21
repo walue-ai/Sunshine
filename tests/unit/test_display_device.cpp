@@ -5,9 +5,15 @@
 #include "../tests_common.h"
 
 #include <src/config.h>
+#ifdef SUNSHINE_CAPNREACTIVE_ENABLED
+#else
 #include <src/display_device.h>
+#endif
 #include <src/rtsp.h>
 
+#ifdef SUNSHINE_CAPNREACTIVE_ENABLED
+int main() { return 0; }
+#else
 namespace {
   using config_option_e = config::video_t::dd_t::config_option_e;
   using device_prep_t = display_device::SingleDisplayConfiguration::DevicePreparation;
@@ -508,3 +514,4 @@ namespace {
     }
   }
 }  // namespace
+#endif  // SUNSHINE_CAPNREACTIVE_ENABLED

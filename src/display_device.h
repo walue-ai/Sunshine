@@ -7,9 +7,34 @@
 // standard includes
 #include <filesystem>
 #include <memory>
+#include <variant>
+#include <vector>
+#include <optional>
 
 // lib includes
+#ifdef SUNSHINE_CAPNREACTIVE_ENABLED
+// Stub types for CapnReactive builds (display_device disabled)
+struct SingleDisplayConfiguration {};
+struct EnumeratedDeviceList {
+  // Make it a proper container for iteration
+  struct Device {
+    bool is_active() const { return false; }
+    // Add m_info member that video.cpp expects
+    struct DeviceInfo {};
+    std::optional<DeviceInfo> m_info;
+    
+    Device() : m_info(std::nullopt) {} // No active devices in headless mode
+  };
+  std::vector<Device> devices;
+  
+  auto begin() const { return devices.begin(); }
+  auto end() const { return devices.end(); }
+  bool empty() const { return devices.empty(); }
+  size_t size() const { return devices.size(); }
+};
+#else
 #include <display_device/types.h>
+#endif
 
 // forward declarations
 namespace platf {

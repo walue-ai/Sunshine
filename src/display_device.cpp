@@ -7,11 +7,13 @@
 
 // lib includes
 #include <boost/algorithm/string.hpp>
+#ifndef SUNSHINE_CAPNREACTIVE_ENABLED
 #include <display_device/audio_context_interface.h>
 #include <display_device/file_settings_persistence.h>
 #include <display_device/json.h>
 #include <display_device/retry_scheduler.h>
 #include <display_device/settings_manager_interface.h>
+#endif
 #include <mutex>
 #include <regex>
 
@@ -19,6 +21,40 @@
 #include "audio.h"
 #include "platform/common.h"
 #include "rtsp.h"
+
+#ifdef SUNSHINE_CAPNREACTIVE_ENABLED
+namespace display_device {
+  std::unique_ptr<platf::deinit_t> init(const std::filesystem::path &persistence_filepath, const config::video_t &video_config) {
+    return nullptr;
+  }
+  
+  std::string map_output_name(const std::string &output_name) {
+    return output_name;
+  }
+  
+  void configure_display(const config::video_t &video_config, const rtsp_stream::launch_session_t &session) {
+  }
+  
+  void configure_display(const SingleDisplayConfiguration &config) {
+  }
+  
+  void revert_configuration() {
+  }
+  
+  bool reset_persistence() {
+    return true;
+  }
+  
+  EnumeratedDeviceList enumerate_devices() {
+    return {};
+  }
+  
+  std::variant<failed_to_parse_tag_t, configuration_disabled_tag_t, SingleDisplayConfiguration> parse_configuration(const config::video_t &video_config, const rtsp_stream::launch_session_t &session) {
+    return configuration_disabled_tag_t{};
+  }
+}
+
+#else
 
 // platform-specific includes
 #ifdef _WIN32
@@ -851,3 +887,4 @@ namespace display_device {
     return config;
   }
 }  // namespace display_device
+#endif  // SUNSHINE_CAPNREACTIVE_ENABLED

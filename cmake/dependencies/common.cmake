@@ -47,8 +47,7 @@ if(NOT DEFINED FFMPEG_PREPARED_BINARIES)
     endif()
     # cmake-lint: disable=C0301
     set(FFMPEG_PREPARED_BINARIES
-            "${CMAKE_SOURCE_DIR}/third-party/build-deps/dist/"
-            "${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
+            "${CMAKE_SOURCE_DIR}/third-party/build-deps/dist/${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
 
     # check if the directory exists
     if(NOT EXISTS "${FFMPEG_PREPARED_BINARIES}")

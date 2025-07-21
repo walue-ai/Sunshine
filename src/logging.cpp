@@ -22,7 +22,7 @@
 // conditional includes
 #ifdef __ANDROID__
   #include <android/log.h>
-#else
+#elif !defined(SUNSHINE_CAPNREACTIVE_ENABLED)
   #include <display_device/logging.h>
 #endif
 
@@ -154,7 +154,9 @@ namespace logging {
 
 #ifndef __ANDROID__
     setup_av_logging(min_log_level);
+#ifndef SUNSHINE_CAPNREACTIVE_ENABLED
     setup_libdisplaydevice_logging(min_log_level);
+#endif
 #endif
 
     sink = boost::make_shared<text_sink>();
@@ -210,6 +212,7 @@ namespace logging {
     });
   }
 
+#ifndef SUNSHINE_CAPNREACTIVE_ENABLED
   void setup_libdisplaydevice_logging(int min_log_level) {
     constexpr int min_level {static_cast<int>(display_device::Logger::LogLevel::verbose)};
     constexpr int max_level {static_cast<int>(display_device::Logger::LogLevel::fatal)};
@@ -239,6 +242,7 @@ namespace logging {
       }
     });
   }
+#endif
 #endif
 
   void log_flush() {
