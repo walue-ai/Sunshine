@@ -1,16 +1,18 @@
 set(CAPNREACTIVE_ROOT "${CMAKE_SOURCE_DIR}/third-party/capnreactive")
-set(CAPNREACTIVE_LIB_DIR "${CAPNREACTIVE_ROOT}/sunshine-integration/target/release")
+set(CAPNREACTIVE_LIB_DIR 
+    "${CAPNREACTIVE_ROOT}/sunshine-integration/target/release")
 
 if(SUNSHINE_ENABLE_CAPNREACTIVE)
     find_package(Git QUIET)
     if(GIT_FOUND AND EXISTS "${CMAKE_SOURCE_DIR}/.git")
-        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
-                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
+        execute_process(
+            COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            RESULT_VARIABLE GIT_SUBMOD_RESULT)
     endif()
 
     if(EXISTS "${CAPNREACTIVE_ROOT}")
-        
+
         add_custom_target(capnreactive_build
             COMMAND cargo build --release
             WORKING_DIRECTORY ${CAPNREACTIVE_ROOT}/sunshine-integration
@@ -19,22 +21,27 @@ if(SUNSHINE_ENABLE_CAPNREACTIVE)
 
         add_library(capnreactive STATIC IMPORTED)
         set_target_properties(capnreactive PROPERTIES
-            IMPORTED_LOCATION ${CAPNREACTIVE_LIB_DIR}/libsunshine_capnreactive_ffi.a
-        )
+            IMPORTED_LOCATION 
+            ${CAPNREACTIVE_LIB_DIR}/libsunshine_capnreactive_ffi.a)
 
         add_dependencies(capnreactive capnreactive_build)
 
-        target_include_directories(sunshine PRIVATE 
+        # cmake-lint: disable=C0301
+        target_include_directories(sunshine PRIVATE
             ${CAPNREACTIVE_ROOT}/sunshine-integration/include
         )
-        
-        target_compile_definitions(sunshine PRIVATE SUNSHINE_CAPNREACTIVE_ENABLED)
+
+        target_compile_definitions(sunshine PRIVATE 
+            SUNSHINE_CAPNREACTIVE_ENABLED)
         target_link_libraries(sunshine PRIVATE capnreactive)
-        
-        message(STATUS "CapnReactive integration enabled (libdisplaydevice disabled due to CMake version conflict)")
+
+        message(STATUS 
+            "CapnReactive integration enabled (libdisplaydevice disabled due to CMake version conflict)")
     else()
-        message(WARNING "CapnReactive requested but submodule not found. Disabling CapnReactive support.")
-        set(SUNSHINE_ENABLE_CAPNREACTIVE OFF CACHE BOOL "CapnReactive support disabled due to missing submodule" FORCE)
+        message(WARNING 
+            "CapnReactive requested but submodule not found. Disabling CapnReactive support.")
+        set(SUNSHINE_ENABLE_CAPNREACTIVE OFF CACHE BOOL 
+            "CapnReactive support disabled due to missing submodule" FORCE)
     endif()
 else()
     message(STATUS "CapnReactive integration disabled")
