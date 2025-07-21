@@ -36,10 +36,15 @@ if(SUNSHINE_ENABLE_CAPNREACTIVE)
         target_link_libraries(sunshine PRIVATE capnreactive)
 
         message(STATUS
-            "CapnReactive integration enabled (libdisplaydevice disabled due to CMake version conflict)")
+            "CapnReactive integration enabled")
+        message(STATUS
+            "libdisplaydevice disabled due to CMake version conflict")
     else()
         message(WARNING
-            "CapnReactive requested but submodule not found. Disabling CapnReactive support.")
+            "CapnReactive requested but submodule not found.")
+        message(WARNING
+            "Disabling CapnReactive support.")
+        # cmake-lint: disable=C0301
         set(SUNSHINE_ENABLE_CAPNREACTIVE OFF CACHE BOOL
             "CapnReactive support disabled due to missing submodule" FORCE)
     endif()

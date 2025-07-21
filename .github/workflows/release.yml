@@ -5,7 +5,7 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch: true
+  workflow_dispatch: {}
 
 jobs:
   build:
@@ -119,21 +119,24 @@ jobs:
 
             - **Ultra-low latency**: QUIC multiplexing eliminates
               head-of-line blocking
-            - **Zero-copy optimization**: Direct GPU memory to transport layer
+            - **Zero-copy optimization**: Direct GPU memory to transport
+              layer
             - **Backward compatibility**: Standard clients continue working
               with ENet transport
-            - **Adaptive quality**: Network-aware bitrate and codec selection
+            - **Adaptive quality**: Network-aware bitrate and codec
+              selection
 
             ### Installation
 
-            Download the appropriate binary for your platform and follow the
-            standard Sunshine installation guide.
+            Download the appropriate binary for your platform and follow
+            the standard Sunshine installation guide.
 
             ### CapnReactive Features
 
             - Enhanced Moonlight-Qt clients automatically detect and use
               CapnReactive transport
-            - Standard clients (VLC, etc.) continue using existing protocols
+            - Standard clients (VLC, etc.) continue using existing
+              protocols
             - Performance improvements of 30-50% lower latency for
               supported clients
 

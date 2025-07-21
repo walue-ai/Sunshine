@@ -21,7 +21,7 @@ add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/Simple-Web-Server")
 
 # libdisplaydevice (conditional inclusion to avoid CMake version conflicts)
 if(NOT DEFINED SUNSHINE_ENABLE_LIBDISPLAYDEVICE OR
-   SUNSHINE_ENABLE_LIBDISPLAYDEVICE)
+    SUNSHINE_ENABLE_LIBDISPLAYDEVICE)
     add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/libdisplaydevice")
 endif()
 
@@ -44,15 +44,17 @@ if(NOT DEFINED FFMPEG_PREPARED_BINARIES)
         set(FFMPEG_PLATFORM_LIBRARIES numa va va-drm va-x11 X11)
     endif()
     set(FFMPEG_PREPARED_BINARIES
-            "${CMAKE_SOURCE_DIR}/third-party/build-deps/dist/${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
+            "${CMAKE_SOURCE_DIR}/third-party/build-deps/dist/"
+            "${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
 
     # check if the directory exists
     if(NOT EXISTS "${FFMPEG_PREPARED_BINARIES}")
         message(FATAL_ERROR
-                "FFmpeg pre-compiled binaries not found at ${FFMPEG_PREPARED_BINARIES}. \
-                Please consider contributing to the LizardByte/build-deps repository. \
-                Optionally, you can use the FFMPEG_PREPARED_BINARIES option to specify the path to the \
-                system-installed FFmpeg libraries")
+                "FFmpeg pre-compiled binaries not found at "
+                "${FFMPEG_PREPARED_BINARIES}. Please consider contributing to "
+                "the LizardByte/build-deps repository. Optionally, you can use "
+                "the FFMPEG_PREPARED_BINARIES option to specify the path to "
+                "the system-installed FFmpeg libraries")
     endif()
 
     if(EXISTS "${FFMPEG_PREPARED_BINARIES}/lib/libhdr10plus.a")
